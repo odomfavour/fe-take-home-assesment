@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { env } from '@/config/env';
+import { APP_BASE_PATH } from '@/config/env';
 const router = createRouter({
-  history: createWebHistory(env.APP_BASE_PATH),
+  history: createWebHistory(APP_BASE_PATH),
   routes: [
     {
       path: '/',
