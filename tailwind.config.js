@@ -8,6 +8,16 @@ export default {
   prefix: '',
 
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-
-  plugins: [animate, primeui],
+  theme: {
+    extend: {
+      colors: {
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        danger: 'var(--color-danger)',
+        background: 'var(--background-color)',
+        text: 'var(--text-color)'
+      }
+    }
+  },
+  plugins: [animate, primeui]
 };
