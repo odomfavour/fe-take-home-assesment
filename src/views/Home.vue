@@ -87,9 +87,14 @@ const analytics = computed(() => {
 
 const filteredData = computed(() => {
   let filtered = [...data.value]
-  if (filter.value === 'low') filtered = filtered.filter(d => d.batteryLevel <= 0.2)
-  else if (filter.value === 'critical') filtered = filtered.filter(d => d.batteryLevel <= 0.1)
-  else if (filter.value === 'good') filtered = filtered.filter(d => d.batteryLevel > 0.5)
+
+  if (filter.value === 'low') {
+    filtered = filtered.filter(d => d.batteryLevel <= 0.2)
+  } else if (filter.value === 'critical') {
+    filtered = filtered.filter(d => d.batteryLevel <= 0.1)
+  } else if (filter.value === 'good') {
+    filtered = filtered.filter(d => d.batteryLevel > 0.5)
+  }
 
   if (searchTerm.value) {
     filtered = filtered.filter(d =>
@@ -101,10 +106,12 @@ const filteredData = computed(() => {
   filtered.sort((a, b) => {
     if (sortBy.value === 'batteryLevel') return a.batteryLevel - b.batteryLevel
     if (sortBy.value === 'employeeId') return a.employeeId.localeCompare(b.employeeId)
-    return new Date(b.timestamp) - new Date(a.timestamp)
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
   })
+
   return filtered
 })
+
 
 const paginatedData = computed(() => {
   const start = (currentPage.value - 1) * rowsPerPage.value;
