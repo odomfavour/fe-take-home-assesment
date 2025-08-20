@@ -2,8 +2,8 @@
   <div class="home bg-secondary min-h-screen">
     <Header v-model:viewMode="viewMode" />
     <section class="max-w-[1440px] mx-auto">
-
-      <div class="w-11/12 mx-auto mt-10">
+      <Loader v-if="isLoading" message="Loading devices..." />
+      <div v-else class="w-11/12 mx-auto mt-10">
         <div class="my-4">
           <p class="text-black text-xl font-semibold">Welcome Admin. </p>
           <p class="text-black text-base">
@@ -37,6 +37,7 @@ import Header from '@/components/Header.vue';
 import StatsCard from '@/components/StatsCard.vue';
 import BatteryTable from '@/components/BatteryTable.vue';
 import DeviceGrid from '@/components/DeviceGrid.vue';
+import Loader from '@/components/Loader.vue';
 import Pagination from '@/components/Pagination.vue';
 import { Smartphone, AlertTriangle, BatteryFull, BatteryLow } from 'lucide-vue-next';
 import deviceData from '@/data/battery.json';
@@ -50,11 +51,13 @@ const sortBy = ref('timestamp');
 const searchTerm = ref('');
 const currentPage = ref(1);
 const rowsPerPage = ref(10);
-
+const isLoading = ref(true);
 
 onMounted(() => {
   data.value = deviceData;
+  isLoading.value = false;
 });
+
 
 const analytics = computed(() => {
   if (!data.value.length) return null;
