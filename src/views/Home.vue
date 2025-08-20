@@ -4,7 +4,8 @@
     <section class="max-w-[1440px] mx-auto">
 
       <div class="w-11/12 mx-auto mt-10">
-        <p class="text-black font-semibold my-4">Welcome Admin</p>
+        <p class="text-black text-lg  my-4">Welcome Admin. <br />The academy ID is <span class="font-semibold">{{
+          data?.[0].academyId }}</span> </p>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <StatsCard :icon="Smartphone" title="Total Devices" :value="analytics?.totalDevices" color="text-blue-600" />
           <StatsCard :icon="BatteryFull" title="High" :value="analytics?.highBatteryCount" color="text-green-600" />
