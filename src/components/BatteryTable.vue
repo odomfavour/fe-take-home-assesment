@@ -1,22 +1,5 @@
-<script setup lang="ts">
-import { Smartphone, User, Battery, AlertTriangle, TrendingDown, TrendingUp } from 'lucide-vue-next'
-import { getBatteryStatus, formatTimestamp } from '@/utils/battery'
-
-interface Reading {
-    serialNumber: string
-    employeeId: string
-    batteryLevel: number
-    timestamp: string
-}
-
-defineProps<{
-    filteredData: Reading[]
-    total: number
-}>()
-</script>
-
 <template>
-    <section class="max-w-[1440px] mx-auto">
+    <section class="max-w-[1440px] mx-auto" data-test="battery-table">
 
         <div class="w-11/12 mx-auto mt-10">
             <div class="bg-white rounded-lg shadow">
@@ -44,7 +27,8 @@ defineProps<{
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr v-for="(reading, index) in filteredData"
                                 :key="`${reading.serialNumber}-${reading.timestamp}-${index}`"
-                                class="hover:bg-gray-50 text-sm text-gray-900">
+                                :data-battery="reading.batteryLevel" class="hover:bg-gray-50 text-sm text-gray-900"
+                                data-test="device-row">
 
                                 <!-- Device -->
                                 <td class="px-6 py-4">
@@ -101,5 +85,21 @@ defineProps<{
             </div>
         </div>
     </section>
-
 </template>
+
+<script setup lang="ts">
+import { Smartphone, User, Battery, AlertTriangle, TrendingDown, TrendingUp } from 'lucide-vue-next';
+import { getBatteryStatus, formatTimestamp } from '@/utils/battery';
+
+interface Reading {
+    serialNumber: string
+    employeeId: string
+    batteryLevel: number
+    timestamp: string
+}
+
+defineProps<{
+    filteredData: Reading[]
+    total: number
+}>();
+</script>
