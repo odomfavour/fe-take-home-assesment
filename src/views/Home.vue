@@ -4,7 +4,7 @@
     <section class="max-w-[1440px] mx-auto">
 
       <div class="w-11/12 mx-auto mt-10">
-        <p>Welcome Admin</p>
+        <p class="text-black font-semibold my-4">Welcome Admin</p>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <StatsCard :icon="Smartphone" title="Total Devices" :value="analytics?.totalDevices" color="text-blue-600" />
           <StatsCard :icon="BatteryFull" title="High" :value="analytics?.highBatteryCount" color="text-green-600" />
@@ -52,34 +52,18 @@ onMounted(() => {
 
 const analytics = computed(() => {
   if (!data.value.length) return null;
-  console.log('data', data.value);
 
-  const criticalBatteryDevices = data.value.filter(d => d.batteryLevel <= 0.1);
-  const lowBatteryDevices = data.value.filter(d => d.batteryLevel > 0.1 && d.batteryLevel <= 0.5);
-  const highBatteryDevices = data.value.filter(d => d.batteryLevel > 0.5);
+  const criticalBatteryDevices = data.value.filter((d: { batteryLevel: number; }) => d.batteryLevel <= 0.1);
+  const lowBatteryDevices = data.value.filter((d: { batteryLevel: number; }) => d.batteryLevel > 0.1 && d.batteryLevel <= 0.5);
+  const highBatteryDevices = data.value.filter((d: { batteryLevel: number; }) => d.batteryLevel > 0.5);
 
-  const avg =
-    data.value.reduce((s, d) => s + d.batteryLevel, 0) / data.value.length;
 
-  const latestReadings = Object.values(
-    data.value.reduce<Record<string, DeviceData>>((acc, r) => {
-      if (
-        !acc[r.serialNumber] ||
-        new Date(r.timestamp) > new Date(acc[r.serialNumber].timestamp)
-      ) {
-        acc[r.serialNumber] = r;
-      }
-      return acc;
-    }, {})
-  );
 
   return {
     totalDevices: data.value.length,
     criticalBatteryCount: criticalBatteryDevices.length,
     lowBatteryCount: lowBatteryDevices.length,
     highBatteryCount: highBatteryDevices.length,
-    averageBattery: avg,
-    latestReadings,
   };
 });
 

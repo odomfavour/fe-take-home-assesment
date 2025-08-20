@@ -1,5 +1,5 @@
 <template>
-    <section class="max-w-[1440px] mx-auto">
+    <section class="max-w-[1440px] mx-auto" data-test="device-grid">
         <div class="w-11/12 mx-auto mt-10">
             <div class="bg-white rounded-lg shadow p-6">
                 <h2 class="text-xl font-semibold text-gray-900 mb-2">Battery Readings</h2>
@@ -7,10 +7,10 @@
                     Showing {{ filteredData.length }} of {{ total }} readings
                 </p>
 
-                <!-- Grid view -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div v-for="(reading, index) in filteredData" :key="`${reading.serialNumber}-${index}`"
-                        class="bg-white rounded-xl border border-gray-200 shadow-md transition cursor-pointer">
+                        class="bg-white rounded-xl border border-gray-200 shadow-md transition cursor-pointer"
+                        data-test="device-row" :data-battery="reading.batteryLevel">
                         <div class="p-6">
 
                             <div class="flex items-center justify-between mb-4">
@@ -48,10 +48,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-import { AlertTriangle, TrendingDown, TrendingUp } from "lucide-vue-next";
-import { formatTimestamp, getBatteryStatus } from "@/utils/battery";
-import type { DeviceData } from "@/types/device-data";
+import { AlertTriangle, TrendingDown, TrendingUp } from 'lucide-vue-next';
+import { formatTimestamp, getBatteryStatus } from '@/utils/battery';
+import type { DeviceData } from '@/types/device-data';
 
 
 defineProps<{

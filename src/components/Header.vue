@@ -19,7 +19,7 @@
                             Grid
                         </button>
 
-                        <button @click="setViewMode('table')" :class="[
+                        <button data-test="toggle-table" @click="setViewMode('table')" :class="[
                             'flex items-center gap-1 px-3 py-1.5 cursor-pointer rounded-md text-sm font-medium transition',
                             viewMode === 'table'
                                 ? 'bg-gray-100 text-black'
@@ -36,18 +36,17 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutGrid, List } from "lucide-vue-next";
-import { defineProps, defineEmits } from "vue";
+import { LayoutGrid, List } from 'lucide-vue-next';
 
 const { viewMode } = defineProps<{
-    viewMode: "grid" | "table";
+    viewMode: 'grid' | 'table';
 }>();
 
 const emit = defineEmits<{
-    (e: "update:viewMode", mode: "grid" | "table"): void;
+    (e: 'update:viewMode', mode: 'grid' | 'table'): void;
 }>();
 
-const setViewMode = (mode: "grid" | "table") => {
-    emit("update:viewMode", mode);
+const setViewMode = (mode: 'grid' | 'table') => {
+    emit('update:viewMode', mode);
 };
 </script>
