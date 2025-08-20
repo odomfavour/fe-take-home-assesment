@@ -5,7 +5,7 @@
 
       <div class="w-11/12 mx-auto mt-10">
         <div class="my-4">
-          <p class="text-black text-2xl font-bold">Welcome Admin. </p>
+          <p class="text-black text-xl font-semibold">Welcome Admin. </p>
           <p class="text-black text-base">
             You are currently managing academy <span class="font-semibold">{{
               data?.[0]?.academyId || '' }}</span>
