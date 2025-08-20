@@ -32,19 +32,19 @@ src/
 ### Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Run development server
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Run unit tests
 
 ```bash
-npm run test
+pnpm run test
 ```
 
 ### Assumptions
@@ -83,30 +83,37 @@ Integration tests include
 The project is structured to scale gracefully as new features are added:
 
 - Components (components/)
+
   - Reusable building blocks like StatsCard, BatteryTable, DeviceGrid, Pagination, and FilterSection.
   - Each component is self-contained and manages its own props, state, and events, making it easy to reuse or extend in other views.
 
 - Views (views/)
+
   - High-level page components like Home.vue that compose multiple components.
   - Separating views from components allows clean separation of layout vs functionality, simplifying routing and future pages.
 
 - Utils (utils/)
+
   - Helper functions like getBatteryStatus and formatTimestamp.
   - Centralizing utilities avoids code duplication and makes updates consistent across components.
 
 - Types (types/)
+
   - TypeScript interfaces like DeviceData define data contracts between components.
   - Strong typing prevents runtime errors and helps developers understand what data each component expects.
 
 - Data (data/)
+
   - Static source (battery.json) separated from the UI logic.
   - Makes it easy to replace or expand the dataset without touching component logic.
 
 - Tests (tests/)
+
   - Unit and integration tests for components ensure robustness.
   - Testing in isolation means future changes are less likely to introduce regressions.
 
 - Router (router/) & Config (config/)
+
   - Centralized routing and configuration settings allow flexible scaling for multiple pages, environments, or feature flags.
 
   ### View Modes: Grid & Table
@@ -114,6 +121,7 @@ The project is structured to scale gracefully as new features are added:
 The dashboard provides both **grid** and **table** views to improve usability and flexibility:
 
 - **Grid View (`DeviceGrid`)**
+
   - Displays devices as cards with key information at a glance.
   - Ideal for quick scanning and visual comparison.
   - Mobile-friendly with responsive column layout.
@@ -139,3 +147,7 @@ Providing both views allows users to **choose the view that best fits their work
 - Add user authentication and role-based dashboards for multi-user scenarios.
 - Implement real-time battery monitoring with WebSockets or polling for live updates.
 - Add charts for historical trends and analytics.
+
+### Conclusion
+
+This dashboard provides a flexible and scalable solution for monitoring device battery levels, combining responsive UI, interactive data views, and robust testing practices. Its modular design ensures easy maintenance and future enhancements.

@@ -53,9 +53,9 @@ onMounted(() => {
 const analytics = computed(() => {
   if (!data.value.length) return null;
 
-  const criticalBatteryDevices = data.value.filter(d => d.batteryLevel <= 0.1);
-  const lowBatteryDevices = data.value.filter(d => d.batteryLevel > 0.1 && d.batteryLevel <= 0.5);
-  const highBatteryDevices = data.value.filter(d => d.batteryLevel > 0.5);
+  const criticalBatteryDevices = data.value.filter((d: { batteryLevel: number; }) => d.batteryLevel <= 0.1);
+  const lowBatteryDevices = data.value.filter((d: { batteryLevel: number; }) => d.batteryLevel > 0.1 && d.batteryLevel <= 0.5);
+  const highBatteryDevices = data.value.filter((d: { batteryLevel: number; }) => d.batteryLevel > 0.5);
 
 
 
